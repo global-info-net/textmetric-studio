@@ -1,1 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#05070f">
+  <meta name="description" content="Use this free online character counter and word analysis utility to count characters, words, sentences, paragraphs, and estimate reading time instantly.">
+  <meta name="google-site-verification" content="wqDVEHvuQ14lzMtLiEWIOLE-gQHNpV_k75GhLLfVGdA" />
+  <meta name="monetag" content="69de0ae2199d8d09cd14dbb19b0f01a7">
+  <title>Universal Live Character Counter & Word Analyzer</title>
 
+  <script>
+    (function(s){s.dataset.zone='12196498',s.src='https://nap5k.com'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))
+  </script>
+
+  <style>
+    :root {
+      --bg: #05070f;
+      --panel: #0c1220;
+      --panel-soft: #101a2b;
+      --border: rgba(148, 163, 184, .15);
+      --text: #edf5f7;
+      --muted: #91a2b8;
+      --teal: #14b8a6;
+      --teal-light: #5eead4;
+      --danger: #fb7185;
+      --radius: 18px;
+      --shadow: 0 18px 55px rgba(0,0,0,.28);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(ellipse at 50% -15%, rgba(20,184,166,.13), transparent 42%),
+        radial-gradient(ellipse at 100% 35%, rgba(37,99,235,.07), transparent 35%),
+        var(--bg);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+
+    button, textarea { font: inherit; }
+
+    .page-shell {
+      width: min(100% - 32px, 1060px);
+      margin: 0 auto;
+      padding: 34px 0 55px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 38px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      color: var(--text);
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: -.35px;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 38px;
+      height: 38px;
+      place-items: center;
+      border: 1px solid rgba(20,184,166,.4);
+      border-radius: 12px;
+      color: var(--teal-light);
+      background: rgba(20,184,166,.1);
+      box-shadow: 0 0 25px rgba(20,184,166,.1);
+      font-size: 19px;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 11px;
+      border: 1px solid rgba(20,184,166,.22);
+      border-radius: 999px;
+      color: #9dece2;
+      background: rgba(20,184,166,.07);
+      font-size: 11px;
+      font-weight: 750;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--teal);
+      box-shadow: 0 0 10px var(--teal);
+    }
+
+    .hero {
+      max-width: 760px;
+      margin: 0 auto 28px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 13px;
+      color: var(--teal-light);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(29px, 5.6vw, 48px);
+      font-weight: 850;
+      letter-spacing: -1.8px;
+      line-height: 1.12;
+    }
+
+    .hero p {
+      max-width: 650px;
+      margin: 17px auto 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .tool-card {
+      overflow: hidden;
+      border: 1px solid rgba(148,163,184,.17);
+      border-radius: 23px;
+      background: linear-gradient(145deg, rgba(16,26,43,.97), rgba(9,15,27,.98));
+      box-shadow: var(--shadow), 0 0 45px rgba(20,184,166,.045);
+    }
+
+    .tool-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 21px 23px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tool-heading h2 {
+      margin: 0;
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .live-label {
+      color: var(--teal-light);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .editor-area { padding: 22px; }
+
+    .input-label {
+      display: block;
+      margin-bottom: 10px;
+      color: #dce8ef;
+      font-size: 13px;
+      font-weight: 750;
+    }
+
+    textarea {
+      display: block;
+      width: 100%;
+      min-height: 245px;
+      resize: vertical;
+      padding: 18px;
+      border: 1px solid rgba(148,163,184,.2);
+      border-radius: 14px;
+      outline: none;
+      color: #f0fdfa;
+      background: rgba(3,8,18,.78);
+      font-size: 15px;
+      line-height: 1.75;
+      transition: border-color .2s, box-shadow .2s;
+    }
+
+    textarea::placeholder { color: #64748b; }
+
+    textarea:focus {
+      border-color: rgba(20,184,166,.75);
+      box-shadow: 0 0 0 3px rgba(20,184,166,.1);
+    }
+
+    .editor-footer {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 13px;
+    }
+
+    .helper-text {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .action-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+
+    .btn {
+      min-height: 39px;
+      padding: 9px 14px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: #dce8ef;
+      background: #142033;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 750;
+      transition: .2s ease;
+    }
+
+    .btn:hover {
+      border-color: rgba(20,184,166,.55);
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      border-color: var(--teal);
+      color: #03211e;
+      background: var(--teal);
+    }
+
+    .btn-primary:hover { background: var(--teal-light); }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      padding: 0 22px 23px;
+    }
+
+    .metric {
+      min-width: 0;
+      padding: 17px 15px;
+      border: 1px solid rgba(148,163,184,.13);
+      border-radius: 14px;
+      background: rgba(3,8,18,.52);
+    }
+
+    .metric-label {
+      display: block;
+      min-height: 34px;
+      color: #9aabc0;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.45;
+    }
+
+    .metric-value {
+      display: block;
+      margin-top: 8px;
+      color: var(--teal-light);
+      font-size: clamp(23px, 3vw, 30px);
+      font-weight: 850;
+      letter-spacing: -1px;
+      line-height: 1.1;
+      overflow-wrap: anywhere;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .analysis-section {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      padding: 0 22px 23px;
+    }
+
+    .analysis-item {
+      padding: 14px;
+      border: 1px solid rgba(148,163,184,.11);
+      border-radius: 12px;
+      background: rgba(3,8,18,.35);
+    }
+
+    .analysis-item span {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .analysis-item strong {
+      display: block;
+      margin-top: 5px;
+      color: #e2e8f0;
+      font-size: 17px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .content-section {
+      margin-top: 25px;
+      padding: 25px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: rgba(12,18,32,.8);
+    }
+
+    .section-kicker {
+      color: var(--teal-light);
+      font-size: 10px;
+      font-weight: 850;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .content-section h2 {
+      margin: 5px 0 12px;
+      font-size: 21px;
+      letter-spacing: -.5px;
+    }
+
+    .content-section p {
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 19px;
+    }
+
+    .feature {
+      padding: 15px;
+      border: 1px solid rgba(148,163,184,.12);
+      border-radius: 12px;
+      background: rgba(3,8,18,.38);
+    }
+
+    .feature strong {
+      display: block;
+      margin-bottom: 5px;
+      color: #dffaf5;
+      font-size: 13px;
+    }
+
+    .feature span {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .directory {
+      margin-top: 25px;
+      padding: 25px;
+      border: 1px solid rgba(20,184,166,.18);
+      border-radius: var(--radius);
+      background: linear-gradient(145deg, rgba(11,25,35,.92), rgba(10,15,27,.96));
+    }
+
+    .directory-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: end;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 17px;
+    }
+
+    .directory h2 {
+      margin: 4px 0 0;
+      font-size: 20px;
+    }
+
+    .directory-count {
+      color: var(--teal-light);
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .directory-window {
+      max-height: 280px;
+      overflow-y: auto;
+      padding: 12px;
+      border: 1px solid rgba(148,163,184,.13);
+      border-radius: 12px;
+      background: rgba(2,7,15,.65);
+      scrollbar-color: #176e68 #0b1420;
+      scrollbar-width: thin;
+    }
+
+    .link-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .link-grid a {
+      display: block;
+      padding: 10px 12px;
+      overflow-wrap: anywhere;
+      border: 1px solid rgba(148,163,184,.1);
+      border-radius: 8px;
+      color: #b9d6d7;
+      background: rgba(16,26,43,.58);
+      font-size: 12px;
+      text-decoration: none;
+      transition: .2s ease;
+    }
+
+    .link-grid a:hover {
+      border-color: rgba(20,184,166,.5);
+      color: var(--teal-light);
+      background: rgba(20,184,166,.07);
+    }
+
+    .faq-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .faq {
+      padding: 14px;
+      border: 1px solid rgba(148,163,184,.12);
+      border-radius: 11px;
+      background: rgba(3,8,18,.35);
+    }
+
+    .faq h3 {
+      margin: 0 0 6px;
+      color: #e2f7f4;
+      font-size: 14px;
+    }
+
+    .faq p {
+      margin: 0;
+      font-size: 13px;
+    }
+
+    footer {
+      padding: 27px 10px 0;
+      color: #718096;
+      font-size: 11px;
+      text-align: center;
+    }
+
+    .toast {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 5;
+      padding: 11px 15px;
+      border: 1px solid rgba(20,184,166,.35);
+      border-radius: 10px;
+      color: #d9fffa;
+      background: #102b2b;
+      box-shadow: var(--shadow);
+      font-size: 12px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(8px);
+      transition: .2s ease;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 720px) {
+      .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .feature-grid { grid-template-columns: 1fr; }
+      .page-shell { width: min(100% - 22px, 1060px); padding-top: 20px; }
+      .topbar { margin-bottom: 29px; }
+      .hero { margin-bottom: 22px; }
+    }
+
+    @media (max-width: 480px) {
+      .status { font-size: 9px; padding: 6px 8px; }
+      .brand { font-size: 13px; }
+      .brand-mark { width: 34px; height: 34px; }
+      .tool-heading, .editor-area { padding: 17px; }
+      .metrics { gap: 9px; padding: 0 17px 18px; }
+      .metric { padding: 13px; }
+      .metric-label { font-size: 10px; }
+      .analysis-section { grid-template-columns: repeat(2, 1fr); padding: 0 17px 18px; }
+      .content-section, .directory { padding: 19px; }
+      .link-grid { grid-template-columns: 1fr; }
+      textarea { min-height: 215px; }
+      .editor-footer { align-items: flex-start; flex-direction: column; }
+      .action-group { width: 100%; }
+      .action-group .btn { flex: 1; }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page-shell">
+    <nav class="topbar" aria-label="Main navigation">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">Aa</span>
+        <span>TextMetric Studio</span>
+      </div>
+      <div class="status"><span class="status-dot"></span> Live analysis</div>
+    </nav>
+
+    <header class="hero">
+      <span class="eyebrow">Free online text analytics</span>
+      <h1 id="pageTitle">Universal Live Character Counter &amp; Word Analyzer</h1>
+      <p id="pageIntro">Analyze your text instantly with a live character counter, word counter, sentence analyzer, and reading time calculator. Paste or type your content to see accurate results as you work.</p>
+    </header>
+
+    <section class="tool-card" aria-label="Live character and word counter">
+      <div class="tool-heading">
+        <h2>Text Analysis Workspace</h2>
+        <span class="live-label">● Updating live</span>
+      </div>
+
+      <div class="editor-area">
+        <label class="input-label" for="textInput">Type or Paste Content Here</label>
+        <textarea id="textInput" spellcheck="true" placeholder="Start typing or paste your text here to analyze characters, words, sentences, paragraphs, and reading time..."></textarea>
+
+        <div class="editor-footer">
+          <span class="helper-text">Your text is analyzed locally in this browser.</span>
+          <div class="action-group">
+            <button class="btn" id="copyBtn" type="button">Copy Text</button>
+            <button class="btn" id="clearBtn" type="button">Clear Text</button>
+            <button class="btn btn-primary" id="sampleBtn" type="button">Load Sample</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="metrics" aria-live="polite">
+        <div class="metric">
+          <span class="metric-label">Total Characters</span>
+          <strong class="metric-value" id="characters">0</strong>
+        </div>
+        <div class="metric">
+          <span class="metric-label">Total Words</span>
+          <strong class="metric-value" id="words">0</strong>
+        </div>
+        <div class="metric">
+          <span class="metric-label">Characters (No Spaces)</span>
+          <strong class="metric-value" id="noSpaces">0</strong>
+        </div>
+        <div class="metric">
+          <span class="metric-label">Estimated Reading Time</span>
+          <strong class="metric-value" id="readingTime">0 min</strong>
+        </div>
+      </div>
+
+      <div class="analysis-section">
+        <div class="analysis-item">
+          <span>Sentences</span>
+          <strong id="sentences">0</strong>
+        </div>
+        <div class="analysis-item">
+          <span>Paragraphs</span>
+          <strong id="paragraphs">0</strong>
+        </div>
+        <div class="analysis-item">
+          <span>Average Word Length</span>
+          <strong id="averageLength">0</strong>
+        </div>
+        <div class="analysis-item">
+          <span>Letters</span>
+          <strong id="letters">0</strong>
+        </div>
+        <div class="analysis-item">
+          <span>Numbers</span>
+          <strong id="numbers">0</strong>
+        </div>
+        <div class="analysis-item">
+          <span>Spaces</span>
+          <strong id="spaces">0</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <span class="section-kicker">How it works</span>
+      <h2 id="guideTitle">A simple way to measure and understand your text</h2>
+      <p id="guideText">This live word and character analysis utility calculates text statistics as soon as you type or paste content. Use the results to check writing limits, prepare online posts, improve readability, or estimate how long your content may take to read.</p>
+
+      <div class="feature-grid">
+        <div class="feature">
+          <strong>Instant character analysis</strong>
+          <span>Count every character, including spaces and punctuation, while you type.</span>
+        </div>
+        <div class="feature">
+          <strong>Accurate word statistics</strong>
+          <span>Review word totals, sentence counts, paragraph counts, and average word length.</span>
+        </div>
+        <div class="feature">
+          <strong>Reading time estimate</strong>
+          <span>Estimate reading duration using an average reading speed of 200 words per minute.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <span class="section-kicker">Understand your results</span>
+      <h2>What do the text statistics mean?</h2>
+      <p><strong>Total Characters:</strong> The number of characters in your text, including letters, spaces, numbers, and punctuation. Emoji and combined Unicode characters may contain more than one underlying code point.</p>
+      <p><strong>Total Words:</strong> The number of word-like groups separated by whitespace. This provides a practical estimate for everyday writing, posts, and documents.</p>
+      <p><strong>Characters Without Spaces:</strong> The character total after whitespace characters are removed. This is useful when a platform specifies a character limit that excludes spaces.</p>
+      <p><strong>Estimated Reading Time:</strong> A reading-time estimate based on 200 words per minute. Actual reading speed varies with vocabulary, formatting, and subject complexity.</p>
+    </section>
+
+    <section class="content-section">
+      <span class="section-kicker">Writing workflow</span>
+      <h2>How to use this character counter and word analyzer</h2>
+      <p>Enter your text in the workspace above or paste content copied from another application. The dashboard updates automatically without requiring a submit button. Compare the character and word totals with your intended platform or document requirements.</p>
+      <p>Use the clear button to start a new analysis, the copy button to copy your current text, or the sample button to see how the statistics work with example content. No account or installation is required.</p>
+    </section>
+
+    <section class="directory">
+      <div class="directory-head">
+        <div>
+          <span class="section-kicker">Explore text tools</span>
+          <h2>Character Counter &amp; Word Analysis Directory</h2>
+        </div>
+        <span class="directory-count" id="linkCount">60 targeted pages</span>
+      </div>
+      <p style="color:var(--muted);font-size:13px;margin:0 0 14px;">Explore focused text counting guides for social posts, proposals, essays, descriptions, and other writing tasks.</p>
+      <div class="directory-window">
+        <div class="link-grid" id="seoLinks">
+          <a href="?p=character-counter-online-for-twitter-posts">Character counter for Twitter posts</a>
+          <a href="?p=word-count-checker-for-student-essays">Word count checker for student essays</a>
+          <a href="?p=text-length-analyzer-for-blog-paragraphs">Text length analyzer for blog paragraphs</a>
+          <a href="?p=letter-count-utility-for-instagram-captions">Letter count utility for Instagram captions</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <span class="section-kicker">Frequently asked questions</span>
+      <h2>Character Counter &amp; Word Analyzer FAQs</h2>
+      <div class="faq-list">
+        <div class="faq">
+          <h3>How do I count characters in a text?</h3>
+          <p>Paste or type your content into the text area. The total character count and character count without spaces update automatically.</p>
+        </div>
+        <div class="faq">
+          <h3>Does the word counter include punctuation?</h3>
+          <p>Punctuation remains part of the character count. Word totals are calculated from groups of text separated by whitespace.</p>
+        </div>
+        <div class="faq">
+          <h3>How is reading time calculated?</h3>
+          <p>The tool estimates reading time at 200 words per minute. It rounds up to the next whole minute when your text contains words.</p>
+        </div>
+        <div class="faq">
+          <h3>Can I use this tool for social media and SEO content?</h3>
+          <p>Yes. You can check text length for social media captions, SEO meta descriptions, blog content, proposals, essays, and other writing.</p>
+        </div>
+        <div class="faq">
+          <h3>Is my text uploaded to a server?</h3>
+          <p>The counting calculations run locally in your browser. The text you enter is not sent to a server by the counter functionality on this page.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>TextMetric Studio · Free online character counter and word analysis utility</p>
+      <p>Text statistics are estimates intended to support everyday writing and editing.</p>
+    </footer>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    (function () {
+      "use strict";
+
+      const input = document.getElementById("textInput");
+
+      const output = {
+        characters: document.getElementById("characters"),
+        words: document.getElementById("words"),
+        noSpaces: document.getElementById("noSpaces"),
+        readingTime: document.getElementById("readingTime"),
+        sentences: document.getElementById("sentences"),
+        paragraphs: document.getElementById("paragraphs"),
+        averageLength: document.getElementById("averageLength"),
+        letters: document.getElementById("letters"),
+        numbers: document.getElementById("numbers"),
+        spaces: document.getElementById("spaces")
+      };
+
+      const numberFormat = new Intl.NumberFormat();
+
+      function countWords(text) {
+        const trimmed = text.trim();
+        if (!trimmed) return [];
+        return trimmed.split(/\s+/u).filter(Boolean);
+      }
+
+      function countSentences(text) {
+        const trimmed = text.trim();
+        if (!trimmed) return 0;
+
+        const matches = trimmed.match(/[^.!?。！？]+[.!?。！？]+|[^.!?。！？]+$/gu);
+        return matches ? matches.filter(part => part.trim().length > 0).length : 0;
+      }
+
+      function updateMetrics() {
+        const text = input.value;
+        const words = countWords(text);
+        const characterCount = Array.from(text).length;
+        const charactersWithoutWhitespace = Array.from(text.replace(/\s/gu, "")).length;
+        const letters = (text.match(/\p{L}/gu) || []).length;
+        const numbers = (text.match(/\p{N}/gu) || []).length;
+        const spaces = (text.match(/\s/gu) || []).length;
+        const paragraphs = text.trim()
+          ? text.trim().split(/\n\s*\n+/u).filter(part => part.trim().length > 0).length
+          : 0;
+
+        const wordCount = words.length;
+        const readingMinutes = wordCount ? Math.ceil(wordCount / 200) : 0;
+        const totalWordCharacters = words.reduce((sum, word) => sum + Array.from(word).length, 0);
+        const averageLength = wordCount ? (totalWordCharacters / wordCount).toFixed(1) : "0";
+
+        output.characters.textContent = numberFormat.format(characterCount);
+        output.words.textContent = numberFormat.format(wordCount);
+        output.noSpaces.textContent = numberFormat.format(charactersWithoutWhitespace);
+        output.readingTime.textContent = readingMinutes + (readingMinutes === 1 ? " min" : " min");
+        output.sentences.textContent = numberFormat.format(countSentences(text));
+        output.paragraphs.textContent = numberFormat.format(paragraphs);
+        output.averageLength.textContent = averageLength;
+        output.letters.textContent = numberFormat.format(letters);
+        output.numbers.textContent = numberFormat.format(numbers);
+        output.spaces.textContent = numberFormat.format(spaces);
+      }
+
+      input.addEventListener("input", updateMetrics, { passive: true });
+
+      const toast = document.getElementById("toast");
+      let toastTimeout;
+
+      function showToast(message) {
+        toast.textContent = message;
+        toast.classList.add("show");
+        clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => toast.classList.remove("show"), 2200);
+      }
+
+      document.getElementById("clearBtn").addEventListener("click", function () {
+        input.value = "";
+        updateMetrics();
+        input.focus();
+        showToast("Text cleared");
+      });
+
+      document.getElementById("copyBtn").addEventListener("click", async function () {
+        if (!input.value) {
+          showToast("There is no text to copy");
+          return;
+        }
+
+        try {
+          await navigator.clipboard.writeText(input.value);
+          showToast("Text copied to clipboard");
+        } catch (error) {
+          input.focus();
+          input.select();
+          const copied = document.execCommand("copy");
+          showToast(copied ? "Text copied to clipboard" : "Select and copy your text");
+        }
+      });
+
+      document.getElementById("sampleBtn").addEventListener("click", function () {
+        input.value = "A good writing workflow starts with clear ideas and careful editing. Use a character counter to check length, a word counter to measure content, and a reading time estimate to understand how long your text may take to read.\n\nReview your writing, remove unnecessary words, and make every sentence useful to your reader.";
+        updateMetrics();
+        showToast("Sample text loaded");
+      });
+
+      const corePhrases = [
+        "character-counter-online-for",
+        "word-count-checker-for",
+        "text-length-analyzer-for",
+        "letter-count-utility-for",
+        "reading-time-calculator-for",
+        "sentence-counter-tool-for"
+      ];
+
+      const targets = [
+        "twitter-posts",
+        "upwork-proposals",
+        "student-essays",
+        "seo-meta-descriptions",
+        "blog-paragraphs",
+        "fiverr-gigs",
+        "instagram-captions",
+        "reddit-stories",
+        "youtube-descriptions",
+        "coding-strings"
+      ];
+
+      const targetLabels = {
+        "twitter-posts": "Twitter posts",
+        "upwork-proposals": "Upwork proposals",
+        "student-essays": "student essays",
+        "seo-meta-descriptions": "SEO meta descriptions",
+        "blog-paragraphs": "blog paragraphs",
+        "fiverr-gigs": "Fiverr gigs",
+        "instagram-captions": "Instagram captions",
+        "reddit-stories": "Reddit stories",
+        "youtube-descriptions": "YouTube descriptions",
+        "coding-strings": "coding strings"
+      };
+
+      const coreLabels = {
+        "character-counter-online-for": "Character Counter Online",
+        "word-count-checker-for": "Word Count Checker",
+        "text-length-analyzer-for": "Text Length Analyzer",
+        "letter-count-utility-for": "Letter Count Utility",
+        "reading-time-calculator-for": "Reading Time Calculator",
+        "sentence-counter-tool-for": "Sentence Counter Tool"
+      };
+
+      const linksContainer = document.getElementById("seoLinks");
+      const validSlugs = [];
+
+      function buildDirectory() {
+        const fragment = document.createDocumentFragment();
+
+        corePhrases.forEach(core => {
+          targets.forEach(target => {
+            const slug = core + "-" + target;
+            validSlugs.push(slug);
+
+            const link = document.createElement("a");
+            link.href = "?p=" + encodeURIComponent(slug);
+            link.textContent = coreLabels[core] + " for " + targetLabels[target];
+            fragment.appendChild(link);
+          });
+        });
+
+        linksContainer.replaceChildren(fragment);
+        document.getElementById("linkCount").textContent = validSlugs.length + " targeted pages";
+      }
+
+      function titleCaseSlug(slug) {
+        return slug
+          .split("-")
+          .filter(Boolean)
+          .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(" ");
+      }
+
+      function initializeProgrammaticPage() {
+        const params = new URLSearchParams(window.location.search);
+        const requestedSlug = (params.get("p") || "").toLowerCase().trim();
+
+        const pageTitle = document.getElementById("pageTitle");
+        const pageIntro = document.getElementById("pageIntro");
+        const guideTitle = document.getElementById("guideTitle");
+        const guideText = document.getElementById("guideText");
+        const description = document.querySelector('meta[name="description"]');
+
+        const isValidSlug = validSlugs.includes(requestedSlug);
+
+        if (isValidSlug) {
+          const keyword = titleCaseSlug(requestedSlug);
+          const target = requestedSlug.split("-").slice(-2).join(" ");
+          const readableTarget = targetLabels[target] || target.replace(/-/g, " ");
+
+          document.title = keyword.toUpperCase() + " - 100% Free Word Counter";
+
+          description.setAttribute(
+            "content",
+            "Use this free " + keyword.toLowerCase() +
+            " to instantly check characters, words, sentences, and estimated reading time. Analyze " +
+            readableTarget + " with live text statistics."
+          );
+
+          pageTitle.textContent = keyword;
+          pageIntro.textContent =
+            "Check the length and structure of your " + readableTarget +
+            " with this free " + keyword.toLowerCase() +
+            ". Paste or type your content to instantly measure characters, words, sentences, and estimated reading time.";
+
+          guideTitle.textContent = "How to analyze " + readableTarget;
+          guideText.textContent =
+            "Use this focused text analysis page to review " + readableTarget +
+            " before publishing or submitting your content. Enter your text in the live workspace above to calculate character totals, word count, sentence count, paragraph count, and estimated reading time. Results update automatically as you edit.";
+        } else {
+          document.title = "Universal Live Character Counter & Word Analyzer";
+          description.setAttribute(
+            "content",
+            "Use this free online character counter and word analysis utility to count characters, words, sentences, paragraphs, and estimate reading time instantly."
+          );
+
+          pageTitle.textContent = "Universal Live Character Counter & Word Analyzer";
+          pageIntro.textContent =
+            "Analyze your text instantly with a live character counter, word counter, sentence analyzer, and reading time calculator. Paste or type your content to see accurate results as you work.";
+
+          guideTitle.textContent = "A simple way to measure and understand your text";
+          guideText.textContent =
+            "This live word and character analysis utility calculates text statistics as soon as you type or paste content. Use the results to check writing limits, prepare online posts, improve readability, or estimate how long your content may take to read.";
+        }
+      }
+
+      window.onload = function () {
+        buildDirectory();
+        initializeProgrammaticPage();
+        updateMetrics();
+      };
+    })();
+  </script>
+</body>
+</html>
